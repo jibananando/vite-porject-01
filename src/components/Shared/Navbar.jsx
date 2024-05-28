@@ -1,50 +1,83 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+import React, { useState } from 'react';
+
 
 const Navbar = () => {
-    return (
-        <div className="navbar bg-base-100">
-        <div className="flex-1">
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
+
+  return (
+    <nav className="bg-gradient-to-r from-orange-400 to-red-500 text-white p-4 fixed w-full z-10">
+      <div className="container mx-auto flex justify-between items-center">
+        <div>
+          <h1 className="text-lg font-bold">Logo</h1>
         </div>
-        <div className="flex-none">
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-              <div className="indicator">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                <span className="badge badge-sm indicator-item">8</span>
+        <div className="hidden md:flex items-center space-x-6">
+          <a href="/" className="hover:text-gray-300">Home</a>
+          <a href="/about" className="hover:text-gray-300">About</a>
+          <a href="/blog" className="hover:text-gray-300">Blog</a>
+          <div className="relative">
+            <button onClick={toggleDropdown} className="hover:text-gray-300 focus:outline-none">
+              Dashboard
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1 inline-block" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 17a1 1 0 0 1-.707-.293l-6-6a1 1 0 0 1 1.414-1.414L10 14.586l4.293-4.293a1 1 0 1 1 1.414 1.414l-5 5a1 1 0 0 1-.707.293z" clipRule="evenodd" />
+              </svg>
+            </button>
+            {dropdownOpen && (
+              <div className="absolute bg-gray-800 mt-2 w-36 right-0 rounded-lg shadow-lg z-10">
+                <a href="/dashboard" className="block px-4 py-2 hover:bg-gray-700">Dashboard</a>
+                {!loggedIn ? (
+                  <React.Fragment>
+                    <a href="/login" className="block px-4 py-2 hover:bg-gray-700">Login</a>
+                    <a href="/register" className="block px-4 py-2 hover:bg-gray-700">Register</a>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <a href="/profile" className="block px-4 py-2 hover:bg-gray-700">Profile</a>
+                    <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-700 focus:outline-none">Logout</button>
+                  </React.Fragment>
+                )}
               </div>
-            </div>
-            <div tabIndex={0} className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
-              <div className="card-body">
-                <span className="font-bold text-lg">8 Items</span>
-                <span className="text-info">Subtotal: $999</span>
-                <div className="card-actions">
-                  <button className="btn btn-primary btn-block">View cart</button>
-                </div>
-              </div>
-            </div>
+            )}
           </div>
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
+        </div>
+        <div className="md:hidden">
+          <button onClick={toggleDropdown} className="block text-white hover:text-gray-300 focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M3 9a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1-1zm0 4a1 1 0 1 1 0-2h12a1 1 0 1 1 0 2H4a1 1 0 0 1-1 1zm1-7a1 1 0 1 1 0-2h10a1 1 0 1 1 0 2H4z" clipRule="evenodd" />
+            </svg>
+          </button>
+          {dropdownOpen && (
+            <div className="absolute bg-gray-800 mt-2 w-36 right-0 rounded-lg shadow-lg z-10">
+              <a href="/home" className="block px-4 py-2 hover:bg-gray-700">Home</a>
+              <a href="/blog" className="block px-4 py-2 hover:bg-gray-700">Blog</a>
+              <a href="/about" className="block px-4 py-2 hover:bg-gray-700">About</a>
+              <a href="/dashboard" className="block px-4 py-2 hover:bg-gray-700">Dashboard</a>
+              {!loggedIn ? (
+                <React.Fragment>
+                  <a href="/login" className="block px-4 py-2 hover:bg-gray-700">Login</a>
+                  <a href="/register" className="block px-4 py-2 hover:bg-gray-700">Register</a>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <a href="/profile" className="block px-4 py-2 hover:bg-gray-700">Profile</a>
+                  <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-700 focus:outline-none">Logout</button>
+                </React.Fragment>
+              )}
             </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li><a>Settings</a></li>
-              <li><a>Logout</a></li>
-            </ul>
-          </div>
+          )}
         </div>
       </div>
-    );
+    </nav>
+  );
 };
 
 export default Navbar;
