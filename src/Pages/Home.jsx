@@ -11,7 +11,6 @@ const home = () => {
             <Navbar></Navbar>
             <Banner></Banner>
             <Products/>
-            <Footer></Footer>
         </div>
     );
 };

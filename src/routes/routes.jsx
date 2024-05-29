@@ -7,6 +7,7 @@ import Register from "../Pages/Register";
 import ErrorPage from "../Pages/ErrorPage";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../Pages/Dashboard";
+import Blog from "../Pages/Blog";
 
 export const router = createBrowserRouter([
   {
@@ -21,25 +22,30 @@ export const router = createBrowserRouter([
         path: "about",
         element: <About/>,
       },
-    ],
-  },
-  {
-    path: "/login",
-    element: <Login/>,
-  },
-  {
-    path: "/register",
-    element: <Register/>,
-  },
-  {
-    path: "/dashboard",
-    element: <DashboardLayout/>,
-    errorElement: <ErrorPage/>,
-    children: [
       {
-        path: "",
-        element: <Dashboard/>,
+        path: "blog",
+        element: <Blog/>,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
+      },
+      {
+        path: "/register",
+        element: <Register/>,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardLayout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+          {
+            path: "",
+            element: <Dashboard/>,
+          },
+        ],
       },
     ],
   },
+  
 ]);

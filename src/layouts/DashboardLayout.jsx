@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
-    return (
-        <div className="drawer lg:drawer-open">
+  return (
+    <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-center">
         <Outlet />
@@ -41,7 +41,7 @@ const DashboardLayout = () => {
         </ul>
       </div>
     </div>
-    );
+  );
 };
 
 export default DashboardLayout;
